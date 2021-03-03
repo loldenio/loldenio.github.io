@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">  
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta name="author" content="Alden Michaels alden@rad-lab.org"/>
+<meta name="description" content="MD5, SHA-1, and SHA-256 hashing as you type"/>
+<title>rapid md5, sha-1, and sha-256 text hashing</title>
+<style type="text/css">
+body {
+	font-family: courier;
+}
+input {
+	font-family: courier;
+	width: 38.5em;
+	font-size: 1.5em;
+	border: 1px solid #fff;
+}
+input#text, input#submit {
+	border: 1px solid #000;
+}
+#theGoodz {
+	margin: auto;
+	width: 62em;
+}
+</style>
+<script type="text/javascript">
+//<![CDATA[ 
+
+function loaded() {
+	document.getElementById("submit").style.display="none";
+	document.getElementById("js_warning").style.display="none";
+	document.onkeydown=function(e){if(e.keyCode=='13'){return false;}};
+	if (text = window.location.hash.substr(1) ) {
+		document.getElementById("text").value = text;
+		encode(text);
+	}
+}
+
+function encode(text){
+	document.getElementById('md5').value=MD5(text);
+	document.getElementById('sha1').value=SHA1(text);
+	document.getElementById('sha256').value=SHA256(text);
+}
+
+//get things going a bit faster if youve got firefox :)
+if (document.addEventListener) {
+	document.addEventListener("DOMContentLoaded", loaded, false);
+}
+
+/**
+*
+*  MD5, SHA-1, & SHA-256 libraries thanks to 
+*  http://www.webtoolkit.info/
+*
+*  for unpacked javascript see /md5.js, /sha1.js, & /sha256.js
+*
+*  packed by packer 3.0 (http://dean.edwards.name/packer/)
+*
+**/
+eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('w 2p(e){w 1a(n,s){t a=(n<<s)|(n>>>(32-s));u a};w 2q(a){t b="";t i;t c;t d;L(i=0;i<=6;i+=2){c=(a>>>(i*4+4))&1J;d=(a>>>(i*4))&1J;b+=c.1D(16)+d.1D(16)}u b};w 1h(a){t b="";t i;t v;L(i=7;i>=0;i--){v=(a>>>(i*4))&1J;b+=v.1D(16)}u b};w 1i(a){a=a.1K(/\\r\\n/g,"\\n");t b="";L(t n=0;n<a.Y;n++){t c=a.V(n);1b(c<Z){b+=N.O(c)}1d 1b((c>1L)&&(c<1M)){b+=N.O((c>>6)|1N);b+=N.O((c&1e)|Z)}1d{b+=N.O((c>>12)|1O);b+=N.O(((c>>6)&1e)|Z);b+=N.O((c&1e)|Z)}}u b};t f;t i,j;t W=1l 1f(2r);t g=1Y;t h=1Z;t k=26;t l=27;t m=2s;t A,B,C,D,E;t o;e=1i(e);t p=e.Y;t q=1l 1f();L(i=0;i<p-3;i+=4){j=e.V(i)<<24|e.V(i+1)<<16|e.V(i+2)<<8|e.V(i+3);q.1m(j)}2t(p%4){1E 0:i=2u;1F;1E 1:i=e.V(p-1)<<24|2v;1F;1E 2:i=e.V(p-2)<<24|e.V(p-1)<<16|2w;1F;1E 3:i=e.V(p-3)<<24|e.V(p-2)<<16|e.V(p-1)<<8|1P;1F}q.1m(i);28((q.Y%16)!=14)q.1m(0);q.1m(p>>>29);q.1m((p<<3)&1c);L(f=0;f<q.Y;f+=16){L(i=0;i<16;i++)W[i]=q[f+i];L(i=16;i<=2a;i++)W[i]=1a(W[i-3]^W[i-8]^W[i-14]^W[i-16],1);A=g;B=h;C=k;D=l;E=m;L(i=0;i<=19;i++){o=(1a(A,5)+((B&C)|(~B&D))+E+W[i]+2x)&1c;E=D;D=C;C=1a(B,30);B=A;A=o}L(i=20;i<=39;i++){o=(1a(A,5)+(B^C^D)+E+W[i]+2y)&1c;E=D;D=C;C=1a(B,30);B=A;A=o}L(i=40;i<=2z;i++){o=(1a(A,5)+((B&C)|(B&D)|(C&D))+E+W[i]+2A)&1c;E=D;D=C;C=1a(B,30);B=A;A=o}L(i=2B;i<=2a;i++){o=(1a(A,5)+(B^C^D)+E+W[i]+2C)&1c;E=D;D=C;C=1a(B,30);B=A;A=o}g=(g+A)&1c;h=(h+B)&1c;k=(k+C)&1c;l=(l+D)&1c;m=(m+E)&1c}t o=1h(g)+1h(h)+1h(k)+1h(l)+1h(m);u o.2b()}w 2D(s){t o=8;t p=0;w M(x,y){t a=(x&1Q)+(y&1Q);t b=(x>>16)+(y>>16)+(a>>16);u(b<<16)|(a&1Q)}w S(X,n){u(X>>>n)|(X<<(32-n))}w R(X,n){u(X>>>n)}w 2c(x,y,z){u((x&y)^((~x)&z))}w 2d(x,y,z){u((x&y)^(x&z)^(y&z))}w 2e(x){u(S(x,2)^S(x,13)^S(x,22))}w 2f(x){u(S(x,6)^S(x,11)^S(x,25))}w 2g(x){u(S(x,7)^S(x,18)^R(x,3))}w 2h(x){u(S(x,17)^S(x,19)^R(x,10))}w 2i(m,l){t K=1l 1f(2E,2F,2G,2H,2I,2J,2K,2L,2M,2N,2O,2P,2Q,2R,2S,2T,2U,2V,2W,2X,2Y,2Z,31,33,34,35,36,37,38,3a,3b,3c,3d,3e,3f,3g,3h,3i,3j,3k,3l,3m,3n,3o,3p,3q,3r,3s,3t,3u,3v,3w,3x,3y,3z,3A,3B,3C,3D,3E,3F,3G,3H,3I);t k=1l 1f(3J,3K,3L,3M,3N,3O,3P,3Q);t W=1l 1f(1n);t a,b,c,d,e,f,g,h,i,j;t n,1R;m[l>>5]|=1P<<(24-l%32);m[((l+1n>>9)<<4)+15]=l;L(t i=0;i<m.Y;i+=16){a=k[0];b=k[1];c=k[2];d=k[3];e=k[4];f=k[5];g=k[6];h=k[7];L(t j=0;j<1n;j++){1b(j<16)W[j]=m[j+i];1d W[j]=M(M(M(2h(W[j-2]),W[j-7]),2g(W[j-15])),W[j-16]);n=M(M(M(M(h,2f(e)),2c(e,f,g)),K[j]),W[j]);1R=M(2e(a),2d(a,b,c));h=g;g=f;f=e;e=M(d,n);d=c;c=b;b=a;a=M(n,1R)}k[0]=M(a,k[0]);k[1]=M(b,k[1]);k[2]=M(c,k[2]);k[3]=M(d,k[3]);k[4]=M(e,k[4]);k[5]=M(f,k[5]);k[6]=M(g,k[6]);k[7]=M(h,k[7])}u k}w 2j(a){t b=1f();t c=(1<<o)-1;L(t i=0;i<a.Y*o;i+=o){b[i>>5]|=(a.V(i/o)&c)<<(24-i%32)}u b}w 1i(a){a=a.1K(/\\r\\n/g,"\\n");t b="";L(t n=0;n<a.Y;n++){t c=a.V(n);1b(c<Z){b+=N.O(c)}1d 1b((c>1L)&&(c<1M)){b+=N.O((c>>6)|1N);b+=N.O((c&1e)|Z)}1d{b+=N.O((c>>12)|1O);b+=N.O(((c>>6)&1e)|Z);b+=N.O((c&1e)|Z)}}u b}w 2k(a){t b=p?"3R":"3S";t c="";L(t i=0;i<a.Y*4;i++){c+=b.2l((a[i>>2]>>((3-i%4)*8+4))&2m)+b.2l((a[i>>2]>>((3-i%4)*8))&2m)}u c}s=1i(s);u 2k(2i(2j(s),s.Y*o))}t 3T=w(j){w 1o(a,b){u(a<<b)|(a>>>(32-b))}w J(a,b){t c,1G,1j,1k,1g;1j=(a&1S);1k=(b&1S);c=(a&1H);1G=(b&1H);1g=(a&2n)+(b&2n);1b(c&1G){u(1g^1S^1j^1k)}1b(c|1G){1b(1g&1H){u(1g^3U^1j^1k)}1d{u(1g^1H^1j^1k)}}1d{u(1g^1j^1k)}}w F(x,y,z){u(x&y)|((~x)&z)}w G(x,y,z){u(x&z)|(y&(~z))}w H(x,y,z){u(x^y^z)}w I(x,y,z){u(y^(x|(~z)))}w P(a,b,c,d,x,s,e){a=J(a,J(J(F(b,c,d),x),e));u J(1o(a,s),b)};w Q(a,b,c,d,x,s,e){a=J(a,J(J(G(b,c,d),x),e));u J(1o(a,s),b)};w T(a,b,c,d,x,s,e){a=J(a,J(J(H(b,c,d),x),e));u J(1o(a,s),b)};w U(a,b,c,d,x,s,e){a=J(a,J(J(I(b,c,d),x),e));u J(1o(a,s),b)};w 2o(a){t b;t c=a.Y;t d=c+8;t e=(d-(d%1n))/1n;t f=(e+1)*16;t g=1f(f-1);t h=0;t i=0;28(i<c){b=(i-(i%4))/4;h=(i%4)*8;g[b]=(g[b]|(a.V(i)<<h));i++}b=(i-(i%4))/4;h=(i%4)*8;g[b]=g[b]|(1P<<h);g[f-2]=c<<3;g[f-1]=c>>>29;u g};w 1p(a){t b="",1I="",1T,1q;L(1q=0;1q<=3;1q++){1T=(a>>>(1q*8))&3V;1I="0"+1T.1D(16);b=b+1I.3W(1I.Y-2,2)}u b};w 1i(a){a=a.1K(/\\r\\n/g,"\\n");t b="";L(t n=0;n<a.Y;n++){t c=a.V(n);1b(c<Z){b+=N.O(c)}1d 1b((c>1L)&&(c<1M)){b+=N.O((c>>6)|1N);b+=N.O((c&1e)|Z)}1d{b+=N.O((c>>12)|1O);b+=N.O(((c>>6)&1e)|Z);b+=N.O((c&1e)|Z)}}u b};t x=1f();t k,1U,1V,1W,1X,a,b,c,d;t l=7,1r=12,1s=17,1t=22;t m=5,1u=9,1v=14,1w=20;t o=4,1x=11,1y=16,1z=23;t p=6,1A=10,1B=15,1C=21;j=1i(j);x=2o(j);a=1Y;b=1Z;c=26;d=27;L(k=0;k<x.Y;k+=16){1U=a;1V=b;1W=c;1X=d;a=P(a,b,c,d,x[k+0],l,3X);d=P(d,a,b,c,x[k+1],1r,3Y);c=P(c,d,a,b,x[k+2],1s,3Z);b=P(b,c,d,a,x[k+3],1t,41);a=P(a,b,c,d,x[k+4],l,42);d=P(d,a,b,c,x[k+5],1r,43);c=P(c,d,a,b,x[k+6],1s,44);b=P(b,c,d,a,x[k+7],1t,45);a=P(a,b,c,d,x[k+8],l,46);d=P(d,a,b,c,x[k+9],1r,47);c=P(c,d,a,b,x[k+10],1s,48);b=P(b,c,d,a,x[k+11],1t,49);a=P(a,b,c,d,x[k+12],l,4a);d=P(d,a,b,c,x[k+13],1r,4b);c=P(c,d,a,b,x[k+14],1s,4c);b=P(b,c,d,a,x[k+15],1t,4d);a=Q(a,b,c,d,x[k+1],m,4e);d=Q(d,a,b,c,x[k+6],1u,4f);c=Q(c,d,a,b,x[k+11],1v,4g);b=Q(b,c,d,a,x[k+0],1w,4h);a=Q(a,b,c,d,x[k+5],m,4i);d=Q(d,a,b,c,x[k+10],1u,4j);c=Q(c,d,a,b,x[k+15],1v,4k);b=Q(b,c,d,a,x[k+4],1w,4l);a=Q(a,b,c,d,x[k+9],m,4m);d=Q(d,a,b,c,x[k+14],1u,4n);c=Q(c,d,a,b,x[k+3],1v,4o);b=Q(b,c,d,a,x[k+8],1w,4p);a=Q(a,b,c,d,x[k+13],m,4q);d=Q(d,a,b,c,x[k+2],1u,4r);c=Q(c,d,a,b,x[k+7],1v,4s);b=Q(b,c,d,a,x[k+12],1w,4t);a=T(a,b,c,d,x[k+5],o,4u);d=T(d,a,b,c,x[k+8],1x,4v);c=T(c,d,a,b,x[k+11],1y,4w);b=T(b,c,d,a,x[k+14],1z,4x);a=T(a,b,c,d,x[k+1],o,4y);d=T(d,a,b,c,x[k+4],1x,4z);c=T(c,d,a,b,x[k+7],1y,4A);b=T(b,c,d,a,x[k+10],1z,4B);a=T(a,b,c,d,x[k+13],o,4C);d=T(d,a,b,c,x[k+0],1x,4D);c=T(c,d,a,b,x[k+3],1y,4E);b=T(b,c,d,a,x[k+6],1z,4F);a=T(a,b,c,d,x[k+9],o,4G);d=T(d,a,b,c,x[k+12],1x,4H);c=T(c,d,a,b,x[k+15],1y,4I);b=T(b,c,d,a,x[k+2],1z,4J);a=U(a,b,c,d,x[k+0],p,4K);d=U(d,a,b,c,x[k+7],1A,4L);c=U(c,d,a,b,x[k+14],1B,4M);b=U(b,c,d,a,x[k+5],1C,4N);a=U(a,b,c,d,x[k+12],p,4O);d=U(d,a,b,c,x[k+3],1A,4P);c=U(c,d,a,b,x[k+10],1B,4Q);b=U(b,c,d,a,x[k+1],1C,4R);a=U(a,b,c,d,x[k+8],p,4S);d=U(d,a,b,c,x[k+15],1A,4T);c=U(c,d,a,b,x[k+6],1B,4U);b=U(b,c,d,a,x[k+13],1C,4V);a=U(a,b,c,d,x[k+4],p,4W);d=U(d,a,b,c,x[k+11],1A,4X);c=U(c,d,a,b,x[k+2],1B,4Y);b=U(b,c,d,a,x[k+9],1C,4Z);a=J(a,1U);b=J(b,1V);c=J(c,1W);d=J(d,1X)}t q=1p(a)+1p(b)+1p(c)+1p(d);u q.2b()}',62,310,'|||||||||||||||||||||||||||||var|return||function|||||||||||||AddUnsigned||for|safe_add|String|fromCharCode|FF|GG|||HH|II|charCodeAt|||length|128|||||||||||rotate_left|if|0x0ffffffff|else|63|Array|lResult|cvt_hex|Utf8Encode|lX8|lY8|new|push|64|RotateLeft|WordToHex|lCount|S12|S13|S14|S22|S23|S24|S32|S33|S34|S42|S43|S44|toString|case|break|lY4|0x40000000|WordToHexValue_temp|0x0f|replace|127|2048|192|224|0x80|0xFFFF|T2|0x80000000|lByte|AA|BB|CC|DD|0x67452301|0xEFCDAB89|||||||0x98BADCFE|0x10325476|while||79|toLowerCase|Ch|Maj|Sigma0256|Sigma1256|Gamma0256|Gamma1256|core_sha256|str2binb|binb2hex|charAt|0xF|0x3FFFFFFF|ConvertToWordArray|SHA1|lsb_hex|80|0xC3D2E1F0|switch|0x080000000|0x0800000|0x08000|0x5A827999|0x6ED9EBA1|59|0x8F1BBCDC|60|0xCA62C1D6|SHA256|0x428A2F98|0x71374491|0xB5C0FBCF|0xE9B5DBA5|0x3956C25B|0x59F111F1|0x923F82A4|0xAB1C5ED5|0xD807AA98|0x12835B01|0x243185BE|0x550C7DC3|0x72BE5D74|0x80DEB1FE|0x9BDC06A7|0xC19BF174|0xE49B69C1|0xEFBE4786|0xFC19DC6|0x240CA1CC|0x2DE92C6F|0x4A7484AA||0x5CB0A9DC||0x76F988DA|0x983E5152|0xA831C66D|0xB00327C8|0xBF597FC7|0xC6E00BF3||0xD5A79147|0x6CA6351|0x14292967|0x27B70A85|0x2E1B2138|0x4D2C6DFC|0x53380D13|0x650A7354|0x766A0ABB|0x81C2C92E|0x92722C85|0xA2BFE8A1|0xA81A664B|0xC24B8B70|0xC76C51A3|0xD192E819|0xD6990624|0xF40E3585|0x106AA070|0x19A4C116|0x1E376C08|0x2748774C|0x34B0BCB5|0x391C0CB3|0x4ED8AA4A|0x5B9CCA4F|0x682E6FF3|0x748F82EE|0x78A5636F|0x84C87814|0x8CC70208|0x90BEFFFA|0xA4506CEB|0xBEF9A3F7|0xC67178F2|0x6A09E667|0xBB67AE85|0x3C6EF372|0xA54FF53A|0x510E527F|0x9B05688C|0x1F83D9AB|0x5BE0CD19|0123456789ABCDEF|0123456789abcdef|MD5|0xC0000000|255|substr|0xD76AA478|0xE8C7B756|0x242070DB||0xC1BDCEEE|0xF57C0FAF|0x4787C62A|0xA8304613|0xFD469501|0x698098D8|0x8B44F7AF|0xFFFF5BB1|0x895CD7BE|0x6B901122|0xFD987193|0xA679438E|0x49B40821|0xF61E2562|0xC040B340|0x265E5A51|0xE9B6C7AA|0xD62F105D|0x2441453|0xD8A1E681|0xE7D3FBC8|0x21E1CDE6|0xC33707D6|0xF4D50D87|0x455A14ED|0xA9E3E905|0xFCEFA3F8|0x676F02D9|0x8D2A4C8A|0xFFFA3942|0x8771F681|0x6D9D6122|0xFDE5380C|0xA4BEEA44|0x4BDECFA9|0xF6BB4B60|0xBEBFBC70|0x289B7EC6|0xEAA127FA|0xD4EF3085|0x4881D05|0xD9D4D039|0xE6DB99E5|0x1FA27CF8|0xC4AC5665|0xF4292244|0x432AFF97|0xAB9423A7|0xFC93A039|0x655B59C3|0x8F0CCC92|0xFFEFF47D|0x85845DD1|0x6FA87E4F|0xFE2CE6E0|0xA3014314|0x4E0811A1|0xF7537E82|0xBD3AF235|0x2AD7D2BB|0xEB86D391'.split('|'),0,{}))//]]>
+</script>
+</head>
+<body>
+<div id="theGoodz">
+	<form action="/web/20130602115918/http://hash-it.net/" method="post">
+	<table>
+		<tr><td>text: </td>		<td><input type="text" value="" id="text" name="text" onkeyup="encode(this.value)"/><br/></td></tr>
+		<tr><td>md5: </td>		<td><input type="text" value="d41d8cd98f00b204e9800998ecf8427e" readonly="readonly" id="md5"/><br/></td></tr>
+		<tr><td>sha1: </td>		<td><input type="text" value="da39a3ee5e6b4b0d3255bfef95601890afd80709" readonly="readonly" id="sha1"/><br/></td></tr>
+		<tr><td>sha256: </td>	<td><input type="text" value="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" readonly="readonly" id="sha256"/><br/></td></tr>
+		<tr><td></td><td><input id="submit" type="submit" value="hash"/></td></tr>
+	</table>
+	</form>
+	<p id="js_warning">hash-it.net hashes MD5, SHA-1, &amp; SHA-256. hash as you type when javascript is enabled.</p>
+</div>
+</body>
+</html>
